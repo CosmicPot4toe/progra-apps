@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+  },
+  {
+    path: 'reg-asis',
+    loadChildren: () => import('./reg-asis/reg-asis.module').then( m => m.RegAsisPageModule)
   }
 ];
 

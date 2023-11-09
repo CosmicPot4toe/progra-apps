@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	firebaseConfig:{
+		apiKey: "AIzaSyDpZmtrUCD_yRHLMTS9tDt6yB7PAqDiZFM",
+		authDomain: "pgy4121-6ac36.firebaseapp.com",
+		databaseURL: "https://pgy4121-6ac36-default-rtdb.firebaseio.com",
+		projectId: "pgy4121-6ac36",
+		storageBucket: "pgy4121-6ac36.appspot.com",
+		messagingSenderId: "835993719352",
+		appId: "1:835993719352:web:7dbfb909c7cfcd75d50ccd"
+	},
+	ramBaseUrl:"https://rickandmortyapi.com/api/character"
 };
 
 /*
