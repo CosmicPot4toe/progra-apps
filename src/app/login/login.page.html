@@ -1,13 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+<ion-header  >
+  <ion-toolbar >
+    <ion-title>DuocUC</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content #page>
+	<div #div class="container">
+		<form id="login-box" [formGroup]="logForm">
+			<ion-input
+				formControlName="email"
+				id="label"
+				label="Usuario"
+				labelPlacement="floating">
+			</ion-input>
+			<ion-input
+				formControlName="pw"
+				id="label"
+				type="password"
+				label="Contraseña"
+				labelPlacement="floating">
+			</ion-input>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<ion-button
+							id="boton1"
+							(click)="login()"
+							size="default"
+						>Ingresar</ion-button>
+					</ion-col>
+					<ion-col>
+						<ion-button
+							id="boton2"
+							[routerLink]="['/new-pass']"
+							size="small"
+						>Recuperar Contraseña</ion-button>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
 </ion-content>

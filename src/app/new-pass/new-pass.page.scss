@@ -1,0 +1,53 @@
+.container {
+	#new-pass-box {
+		padding-left: 8px;
+		padding-right: 8px;
+		background: rgba(255, 255, 255, 0.747);
+		color: black;
+		text-align: center;
+		border-radius: 10%;
+
+		#boton1 {
+			--background: rgba(255, 184, 0, 1);
+			width: 100%;
+		}
+
+	}
+
+	margin: 15% 10%;
+
+
+}
+
+ion-toolbar {
+	ion-title {
+		text-align: center;
+		color: white;
+		font-size: xx-large;
+		width: min-content;
+		position: absolute;
+		left: 25%;
+		top: 15%;
+		z-index: 9999;
+	}
+
+	--background: linear-gradient(45deg, rgba(26, 26, 26, 1) 68%, rgba(255, 184, 0, 1) 68%);
+
+}
+
+ion-content {
+
+	--background: center / cover no-repeat url('/assets/img/Alameda.jpg');
+
+}
+
+#label {
+	--highlight-color: rgba(26, 26, 26, 1);
+}
+
+#logoutBtn {
+	--background: rgba(26, 26, 26, 1);
+
+	margin: 0;
+
+}

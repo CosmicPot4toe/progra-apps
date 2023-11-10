@@ -1,20 +1,39 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+
+		<ion-button id="logoutBtn" size="large" (click)="logout()">
+			<ion-icon slot="icon-only" name="log-in-outline" color="dark"></ion-icon>
+		</ion-button>
+		<ion-title>
+			DuocUC
+		</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<div #welcom class="container">
+		<h1>Bienvenido</h1>
+		<div *ngFor="let c of char; index as i">
+			<div *ngIf="i == 5">
+				<img [src]="c.image">
+			</div>
+		</div>
+	</div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+	<!-- <ion-list>
+		<ion-item *ngFor="let barcode of qr.barcodes">
+			<ion-label position="stacked">{{ barcode.format }}</ion-label>
+			<ion-input type="text" [value]="barcode.rawValue"></ion-input>
+		</ion-item>
+	</ion-list> -->
+
+	<div #E class="supercontainer">
+		<ion-list>
+			<ion-button expand="block" (click)="scan()" [disabled]="!qr.isSupported">
+				ESCANEAR QR .
+				<ion-icon name="qr-code-outline"></ion-icon>
+			</ion-button>
+			<ion-button expand="block" [routerLink]="['reg-asis']">VER ASISTENCIA</ion-button>
+		</ion-list>
+	</div>
 </ion-content>
