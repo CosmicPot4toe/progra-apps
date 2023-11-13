@@ -10,7 +10,7 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [style.--background]="qr.scanActive?'#00000000':'#fff'">
 	<div #welcom class="container">
 		<h1>Bienvenido</h1>
 		<div *ngFor="let c of char; index as i">
@@ -29,11 +29,16 @@
 
 	<div #E class="supercontainer">
 		<ion-list>
-			<ion-button expand="block" (click)="scan()" [disabled]="!qr.isSupported">
+			<ion-button expand="block" (click)="scan()" [hidden]="qr.scanActive">
 				ESCANEAR QR .
 				<ion-icon name="qr-code-outline"></ion-icon>
 			</ion-button>
-			<ion-button expand="block" [routerLink]="['reg-asis']">VER ASISTENCIA</ion-button>
+			<!-- <ion-button expand="block" [routerLink]="['reg-asis']">VER ASISTENCIA</ion-button> -->
 		</ion-list>
 	</div>
+	<ion-row class="scanner-buttons" [hidden]="!qr.scanActive">
+		<ion-col class="ion-no-padding">
+			<ion-button expand="full" (click)="qr.stopScan()">Stop</ion-button>
+		</ion-col>
+	</ion-row>
 </ion-content>

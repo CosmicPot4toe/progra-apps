@@ -1,44 +1,65 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Barcode, BarcodeFormat, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { Injectable, AfterViewInit, OnDestroy } from '@angular/core';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { AlertController } from '@ionic/angular';
-
 @Injectable({
   providedIn: 'root'
 })
-export class QrService implements OnInit{
-	isSupported = false;
-  barcodes: Barcode[] = [];
+export class QrService implements AfterViewInit,OnDestroy{
+	result!:any;
+	scanActive=false
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertCtrl:AlertController) { }
 
-  ngOnInit() {
-    BarcodeScanner.isSupported().then((result:any) => {
-      this.isSupported = result.supported;
-    });
-  }
-  async scan(): Promise<void> {
-    const granted = await this.requestPermissions();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
-    const { barcodes } = await BarcodeScanner.scan({
-      formats: [BarcodeFormat.QrCode],
-    });
-    this.barcodes.push(...barcodes);
-  }
+	ngAfterViewInit() {
+		BarcodeScanner.prepare()
+	}
 
-  async requestPermissions(): Promise<boolean> {
-    const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';
-  }
+	ngOnDestroy() {
+		BarcodeScanner.stopScan();
+	}
 
-  async presentAlert(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: 'Permission denied',
-      message: 'Please grant camera permission to use the barcode scanner.',
-      buttons: ['OK'],
-    });
-    await alert.present();
-  }
+	async startScan() {
+		const allowed = await this.CheckPerms();
+		if (allowed){
+			const result = await BarcodeScanner.startScan({
+				targetedFormats:['QR_CODE']
+			});
+			if(result.hasContent){
+				this.result = result.content
+				this.scanActive = false
+			}
+		}
+	};
+	async CheckPerms(){
+		return new Promise(async (resolve)=>{
+			const status = await BarcodeScanner.checkPermission({ force: true });
+			if (status.granted){
+				this.scanActive=true
+				resolve(true)
+			} else if(status.denied){
+				const alert =await this.alertCtrl.create({
+					header:'No Perms',
+					message:'permitir camara',
+					buttons:[{
+						text:'no',
+						role:'cancel',
+					},{
+						text:'Abrir Config',
+						handler:()=>{
+							BarcodeScanner.openAppSettings();
+							resolve(false);
+						}
+					}]
+				});
+			await alert.present();
+			} else {
+				resolve(false)
+			}
+		});
+	}
+
+	stopScan(){
+		BarcodeScanner.stopScan();
+		this.scanActive=false
+	}
 }

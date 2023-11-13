@@ -23,7 +23,8 @@ export class HomePage {
 
   constructor(
 		private animCtrl:AnimationController,public authService:AuthService
-		,public route:Router,private rickNmorty:RNmService, public qr:QrService
+		,public route:Router,private rickNmorty:RNmService
+		,public qr:QrService
 	) {}
 	
 	ngOnInit(){
@@ -46,8 +47,9 @@ export class HomePage {
 		this.EE.play();
 	}
 
-	scan(){
-		this.qr.scan();
+	async scan(){
+		await this.qr.startScan();
+		this.route.navigate(['reg-asis'])
   }
 
 	async logout(){
