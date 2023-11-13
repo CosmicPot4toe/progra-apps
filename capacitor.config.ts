@@ -7,6 +7,13 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https'
   }
-};
+,
+    android: {
+       buildOptions: {
+          keystorePath: 'c:\Users\jifig\Documents\GitHub\progra-apps\RegistrAPP.keystore.jks',
+          keystoreAlias: 'RegistrAPP',
+       }
+    }
+  };
 
 export default config;
