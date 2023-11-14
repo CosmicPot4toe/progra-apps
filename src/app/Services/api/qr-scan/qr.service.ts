@@ -21,6 +21,7 @@ export class QrService implements AfterViewInit,OnDestroy{
 	async startScan() {
 		const allowed = await this.CheckPerms();
 		if (allowed){
+			BarcodeScanner.hideBackground();
 			const result = await BarcodeScanner.startScan({
 				targetedFormats:['QR_CODE']
 			});
@@ -59,6 +60,7 @@ export class QrService implements AfterViewInit,OnDestroy{
 	}
 
 	stopScan(){
+		BarcodeScanner.showBackground();
 		BarcodeScanner.stopScan();
 		this.scanActive=false
 	}

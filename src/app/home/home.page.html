@@ -20,13 +20,6 @@
 		</div>
 	</div>
 
-	<!-- <ion-list>
-		<ion-item *ngFor="let barcode of qr.barcodes">
-			<ion-label position="stacked">{{ barcode.format }}</ion-label>
-			<ion-input type="text" [value]="barcode.rawValue"></ion-input>
-		</ion-item>
-	</ion-list> -->
-
 	<div #E class="supercontainer">
 		<ion-list>
 			<ion-button expand="block" (click)="scan()" [hidden]="qr.scanActive">

@@ -49,7 +49,7 @@ export class HomePage {
 
 	async scan(){
 		await this.qr.startScan();
-		this.route.navigate(['reg-asis'])
+		await this.route.navigate(['/home/reg-asis'])
   }
 
 	async logout(){
