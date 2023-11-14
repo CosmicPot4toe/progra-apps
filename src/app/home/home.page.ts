@@ -55,6 +55,9 @@ export class HomePage {
 		await this.authService.logout().catch((error)=>console.log(error))
 		.then(()=>{
 				this.route.navigate(['/login'])
+				if(this.qr.scanActive){
+					this.qr.stopScan()
+				}
 			}
 		)
 	}

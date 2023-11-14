@@ -10,24 +10,26 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-	<div #welcom class="container">
-		<h1>Bienvenido</h1>
-		<!-- <div *ngFor="let c of char; index as i">
-			<div *ngIf="i == 5">
-				<img [src]="c.image">
+<ion-content [fullscreen]="true" [style.--background]="qr.scanActive ? '#00000000':'#fff'">
+	<div [hidden]="qr.scanActive">
+		<div #welcom class="container">
+			<h1>Bienvenido</h1>
+			<div *ngFor="let c of char; index as i">
+				<div *ngIf="i == 5">
+					<img [src]="c.image">
+				</div>
 			</div>
-		</div> -->
-	</div>
-
-	<div #E class="supercontainer">
-		<ion-list>
-			<ion-button expand="block" (click)="scan()" [hidden]="qr.scanActive">
-				ESCANEAR QR .
-				<ion-icon name="qr-code-outline"></ion-icon>
-			</ion-button>
-			<!-- <ion-button expand="block" [routerLink]="['reg-asis']">VER ASISTENCIA</ion-button> -->
-		</ion-list>
+		</div>
+	
+		<div #E class="supercontainer">
+			<ion-list>
+				<ion-button expand="block" (click)="scan()">
+					ESCANEAR QR .
+					<ion-icon name="qr-code-outline"></ion-icon>
+				</ion-button>
+				<!-- <ion-button expand="block" [routerLink]="['reg-asis']">VER ASISTENCIA</ion-button> -->
+			</ion-list>
+		</div>
 	</div>
 	<ion-row class="scanner-buttons" [hidden]="!qr.scanActive">
 		<ion-col class="ion-no-padding">
