@@ -20,7 +20,6 @@ export class HomePage {
 	
 	char:any[] = [];
 	args={} as any;
-
   constructor(
 		private animCtrl:AnimationController,public authService:AuthService
 		,public route:Router,private rickNmorty:RNmService

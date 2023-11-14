@@ -10,14 +10,14 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [style.--background]="qr.scanActive?'#00000000':'#fff'">
+<ion-content [fullscreen]="true">
 	<div #welcom class="container">
 		<h1>Bienvenido</h1>
-		<div *ngFor="let c of char; index as i">
+		<!-- <div *ngFor="let c of char; index as i">
 			<div *ngIf="i == 5">
 				<img [src]="c.image">
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 	<div #E class="supercontainer">
@@ -31,7 +31,7 @@
 	</div>
 	<ion-row class="scanner-buttons" [hidden]="!qr.scanActive">
 		<ion-col class="ion-no-padding">
-			<ion-button expand="full" (click)="qr.stopScan()">Stop</ion-button>
+			<ion-button expand="block" (click)="qr.stopScan()">Stop</ion-button>
 		</ion-col>
 	</ion-row>
 </ion-content>

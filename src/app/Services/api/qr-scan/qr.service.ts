@@ -7,7 +7,6 @@ import { AlertController } from '@ionic/angular';
 export class QrService implements AfterViewInit,OnDestroy{
 	result!:any;
 	scanActive=false
-
   constructor(private alertCtrl:AlertController) { }
 
 	ngAfterViewInit() {
@@ -22,6 +21,7 @@ export class QrService implements AfterViewInit,OnDestroy{
 		const allowed = await this.CheckPerms();
 		if (allowed){
 			BarcodeScanner.hideBackground();
+			document.querySelector('body')!.classList.add('scanner-active');
 			const result = await BarcodeScanner.startScan({
 				targetedFormats:['QR_CODE']
 			});
@@ -61,6 +61,7 @@ export class QrService implements AfterViewInit,OnDestroy{
 
 	stopScan(){
 		BarcodeScanner.showBackground();
+		document.querySelector('body')!.classList.remove('scanner-active');
 		BarcodeScanner.stopScan();
 		this.scanActive=false
 	}
