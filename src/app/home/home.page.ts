@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AnimationController, Animation } from '@ionic/angular';
+import { AnimationController, Animation, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../Services/fb/Auth/auth.service';
@@ -23,7 +23,7 @@ export class HomePage {
   constructor(
 		private animCtrl:AnimationController,public authService:AuthService
 		,public route:Router,private rickNmorty:RNmService
-		,public qr:QrService
+		,public qr:QrService,public navCtrl: NavController
 	) {}
 	
 	ngOnInit(){
@@ -48,7 +48,8 @@ export class HomePage {
 
 	async scan(){
 		await this.qr.startScan();
-		await this.route.navigate(['/home/reg-asis'])
+		await this.route.navigate(['reg-asis',this.qr.result])
+
   }
 
 	async logout(){
