@@ -31,7 +31,6 @@ export class HomePage {
 	ngOnInit(){
 		this.args.page = 0;
 		this.getChars();
-		
 	}
 	ngAfterViewInit(){
 		this.anim = this.animCtrl

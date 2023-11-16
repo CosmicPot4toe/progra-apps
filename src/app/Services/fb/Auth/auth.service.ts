@@ -1,28 +1,33 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { 
+	Auth,
+	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
+	sendPasswordResetEmail
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(public ngFireAuth:AngularFireAuth) { }
+  constructor(public ngFireAuth:Auth) { }
 
   async register(email:string,pw:string){
-		return await this.ngFireAuth.createUserWithEmailAndPassword(email,pw)
+		return await createUserWithEmailAndPassword(this.ngFireAuth,email,pw)
 	}
 	async loginUser(email:string,pw:string){
-		return await this.ngFireAuth.signInWithEmailAndPassword(email,pw)
+		return await signInWithEmailAndPassword(this.ngFireAuth,email,pw)
 	}
 	async resetPW(email:string){
-		return await this.ngFireAuth.sendPasswordResetEmail(email)
+		return await sendPasswordResetEmail(this.ngFireAuth,email)
 	}
 	async logout(){
 		return await this.ngFireAuth.signOut()
 	}
 	async getProfile(){
-		return await this.ngFireAuth.currentUser
+		return this.ngFireAuth.currentUser
 	}
 
 	async isLoggedIn(){
