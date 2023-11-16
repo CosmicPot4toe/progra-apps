@@ -12,7 +12,9 @@ export class RegAsisPage implements OnInit {
   constructor(private route: ActivatedRoute, private auth:AuthService) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.paramMap.get('data'))
+    this.route.paramMap.subscribe(params=>{
+			console.log(params.get('data'))
+		})
   }
   ngAfterViewInit(){
     

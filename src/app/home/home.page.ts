@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../Services/fb/Auth/auth.service';
 import { RNmService } from '../Services/api/r-nm/r-nm.service';
 import { QrService } from '../Services/api/qr-scan/qr.service';
+import { DBService } from '../Services/fb/db/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage {
   constructor(
 		private animCtrl:AnimationController,public authService:AuthService
 		,public route:Router,private rickNmorty:RNmService
-		,public qr:QrService,public navCtrl: NavController,
+		,public qr:QrService,public navCtrl: NavController
+		,public db:DBService,
 	) {}
 	
 	ngOnInit(){
@@ -51,8 +53,6 @@ export class HomePage {
 	async scan(){
 		await this.qr.startScan();
 		await this.route.navigate(['/home/reg-asis',this.qr.result])
-		
-
   }
 
 	async logout(){

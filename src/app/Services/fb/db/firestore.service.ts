@@ -1,43 +1,54 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, docData, addDoc, deleteDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from '../Auth/auth.service';
 
 export interface Clase{
   id?:string
   estud:string
   asig:string
-  secc:string
   fecha:string
+  secc:string
+}
+export interface Usuario{
+	id?:string
+	correo:string
+	nombre:string
 }
 @Injectable({
   providedIn: 'root'
 })
-export class FirestoreService {
-  
-  constructor(private firestore: Firestore) { }
-  getNotes(): Observable<Clase[]> {
-    const notesRef = collection(this.firestore, 'clase');
-    return collectionData(notesRef, { idField: 'id'}) as Observable<Clase[]>;
-  }
-
-  getNoteById(id:string): Observable<Clase> {
-    const noteDocRef = doc(this.firestore, `clase/${id}`);
-    return docData(noteDocRef, { idField: 'id' }) as Observable<Clase>;
-  }
-
-  addNote(clase: Clase) {
-    const notesRef = collection(this.firestore, 'clase');
-    return addDoc(notesRef, clase);
-  }
-
-  deleteNote(clase: Clase) {
-    const noteDocRef = doc(this.firestore, `clase/${clase.id}`);
-    return deleteDoc(noteDocRef);
-  }
-
-  updateNote(clase: Clase) {
-    const noteDocRef = doc(this.firestore, `clase/${clase.id}`);
-    return updateDoc(noteDocRef, { estudiante: clase.estud, asignatura: clase.asig });
-  }
+export class DBService {
+  Mail!:string
+  constructor(private firestore: Firestore,private auth:AuthService) { }
+	/** 
+	 * esta funcion agrega una clase a la coleccion Clase en el firestore
+	 * @param clase
+	 */ 
+	addClase(clase:Clase){
+		const claseRef = collection(this.firestore,'clase');
+		return addDoc(claseRef,clase);
+	}
+	/**
+	 * @returns array con todas las clases registradas
+	 */
+	getClases():Observable<Clase[]>{
+		const claseRef = collection(this.firestore,'clase');
+		return collectionData(claseRef, {idField:'id'}) as Observable<Clase[]>
+	}
+	async getCurrUserName(){
+		await this.auth.getProfile().then(user=>{
+			this.Mail = user?.email||''
+		})
+		const userQRef = await getDocs(
+			query(
+				collection(this.firestore,'usuario'),
+				where("correo","==",this.Mail)
+			)
+		);
+		userQRef.forEach(doc=>{
+			console.log(doc.data())
+		})
+	}
 }
 
