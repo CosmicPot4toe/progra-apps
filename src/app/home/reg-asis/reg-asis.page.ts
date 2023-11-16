@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/Services/fb/Auth/auth.service';
 
 @Component({
   selector: 'app-reg-asis',
@@ -8,9 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegAsisPage implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private auth:AuthService) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.paramMap.get('data'))
   }
-
+  ngAfterViewInit(){
+    
+  }
 }

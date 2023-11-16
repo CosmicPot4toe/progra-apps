@@ -23,12 +23,13 @@ export class HomePage {
   constructor(
 		private animCtrl:AnimationController,public authService:AuthService
 		,public route:Router,private rickNmorty:RNmService
-		,public qr:QrService,public navCtrl: NavController
+		,public qr:QrService,public navCtrl: NavController,
 	) {}
 	
 	ngOnInit(){
 		this.args.page = 0;
 		this.getChars();
+		
 	}
 	ngAfterViewInit(){
 		this.anim = this.animCtrl
@@ -44,11 +45,13 @@ export class HomePage {
 			.duration(2000)
 			.fromTo('transform', 'translateY(3000px)', 'translateY(0px)')
 		this.EE.play();
+		
 	}
 
 	async scan(){
 		await this.qr.startScan();
-		await this.route.navigate(['reg-asis',this.qr.result])
+		await this.route.navigate(['/home/reg-asis',this.qr.result])
+		
 
   }
 
