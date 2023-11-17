@@ -13,7 +13,7 @@
 <ion-content [fullscreen]="true" [style.--background]="qr.scanActive ? '#00000000':'#fff'">
 	<div [hidden]="qr.scanActive">
 		<div #welcom class="container">
-			<h1>Bienvenido</h1>
+			<h1>Bienvenido {{UserName}}</h1>
 			<div *ngFor="let c of char; index as i">
 				<div *ngIf="i == 5">
 					<img [src]="c.image">

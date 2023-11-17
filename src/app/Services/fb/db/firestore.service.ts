@@ -10,16 +10,11 @@ export interface Clase{
   fecha:string
   secc:string
 }
-export interface Usuario{
-	id?:string
-	correo:string
-	nombre:string
-}
 @Injectable({
   providedIn: 'root'
 })
 export class DBService {
-  Mail!:string
+  private Mail!:string
   constructor(private firestore: Firestore,private auth:AuthService) { }
 	/** 
 	 * esta funcion agrega una clase a la coleccion Clase en el firestore
@@ -36,6 +31,11 @@ export class DBService {
 		const claseRef = collection(this.firestore,'clase');
 		return collectionData(claseRef, {idField:'id'}) as Observable<Clase[]>
 	}
+	/**
+	 * te devuelve el nombre de usuario que esta en el firestore
+	 * 
+	 * this shit @returns a promise for some reason but oh well 
+	 */
 	async getCurrUserName(){
 		await this.auth.getProfile().then(user=>{
 			this.Mail = user?.email||''
@@ -43,12 +43,10 @@ export class DBService {
 		const userQRef = await getDocs(
 			query(
 				collection(this.firestore,'usuario'),
-				where("correo","==",this.Mail)
+				where("Correo","==",this.Mail)
 			)
 		);
-		userQRef.forEach(doc=>{
-			console.log(doc.data())
-		})
+		return userQRef.docs[0].data()['Nombre']
 	}
 }
 

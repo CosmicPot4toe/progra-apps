@@ -112,3 +112,6 @@ ion-toggle::part(track) {
 	overflow: visible;
 	
 }
+ion-input[disabled]{
+	opacity: 1;
+}

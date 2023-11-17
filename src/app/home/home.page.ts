@@ -18,19 +18,24 @@ export class HomePage {
 
 	@ViewChild('E',{ read : ElementRef }) E!:ElementRef;
 	private EE!:Animation
-	
+
+	UserName!:string;
+
 	char:any[] = [];
 	args={} as any;
   constructor(
 		private animCtrl:AnimationController,public authService:AuthService
 		,public route:Router,private rickNmorty:RNmService
 		,public qr:QrService,public navCtrl: NavController
-		,public db:DBService,
+		,public db:DBService
 	) {}
 	
 	ngOnInit(){
 		this.args.page = 0;
 		this.getChars();
+		this.db.getCurrUserName().then(res=>{
+			this.UserName = res
+		})
 	}
 	ngAfterViewInit(){
 		this.anim = this.animCtrl
@@ -50,8 +55,8 @@ export class HomePage {
 	}
 
 	async scan(){
-		await this.qr.startScan();
-		await this.route.navigate(['/home/reg-asis',this.qr.result])
+		await this.qr.startScan();/* to test the reg-asis page use the string else the qr result */
+		await this.route.navigate(['/home/reg-asis','PGY4121.004D.14/11/2023 10:30'/*this.qr.result*/])
   }
 
 	async logout(){
