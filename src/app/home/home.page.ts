@@ -53,10 +53,11 @@ export class HomePage {
 		this.EE.play();
 		
 	}
+	
 
 	async scan(){
 		await this.qr.startScan();/* to test the reg-asis page use the string else the qr result */
-		await this.route.navigate(['/home/reg-asis','PGY4121.004D.14/11/2023 10:30'/*this.qr.result*/])
+		await this.route.navigate(['/home/reg-asis',this.qr.result/*this.qr.result*/])
   }
 
 	async logout(){

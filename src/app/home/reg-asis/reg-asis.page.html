@@ -15,10 +15,7 @@
 		<ion-list-header lines="full">
 			<ion-label>Asistencia</ion-label>
 		</ion-list-header>
-		<!-- <ion-item lines="full" class="listHeader">
-			<ion-label><ion-icon name="book"></ion-icon> Asignatura</ion-label>
-			<ion-label slot="end">Ausente/Presente</ion-label>
-		</ion-item> -->
+		
 		<ion-item>
 			<ion-input label="Alumno:" [ngModel]="clase.estud" disabled></ion-input>
 		  </ion-item>
@@ -31,6 +28,7 @@
 		<ion-item>
 			<ion-input label="Sección:" [ngModel]="clase.secc" disabled></ion-input>
 		  </ion-item>
+		<ion-button (click)="sendData">Registrar</ion-button>
 		
 		
 	</ion-list>

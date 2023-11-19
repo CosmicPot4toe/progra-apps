@@ -20,11 +20,20 @@ export class RegAsisPage implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params=>{
-			console.log(params.get('data'))
+			var data: any = params.get('data')
+			var e = data.split(".",3)
+			this.clase.asig = e[0]	
+			this.clase.secc = e[1]
+			this.clase.fecha = e[2]
+			
+		
 		})
 		this.db.getCurrUserName().then(res=>{
 			this.clase.estud = res
 		})
+  }
+  sendData(){
+	this.db.addClase(this.clase)
   }
 
 
