@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content #page>
-	<div #div class="container">
+	<div #div class="container animate_animated animate__zoomIn ">
 		<form id="login-box" [formGroup]="logForm">
 			<ion-input
 				formControlName="email"
@@ -23,18 +23,26 @@
 			<ion-grid>
 				<ion-row>
 					<ion-col>
-						<ion-button
+						<ion-button class="  "
 							id="boton1"
 							(click)="login()"
 							size="default"
-						>Ingresar</ion-button>
+						>
+						Ingresar</ion-button>
+						<ion-alert
+  trigger="present-alert"
+  header="A Short Title Is Best"
+  subHeader="A Sub Header Is Optional"
+  message="A message should be a short, complete sentence."
+  [buttons]="alertButtons"
+></ion-alert>
 					</ion-col>
 					<ion-col>
-						<ion-button
+						<ion-button 
 							id="boton2"
 							[routerLink]="['/new-pass']"
 							size="small"
-						>Recuperar Contraseña</ion-button>
+						> Recuperar Contraseña </ion-button>
 					</ion-col>
 				</ion-row>
 			</ion-grid>

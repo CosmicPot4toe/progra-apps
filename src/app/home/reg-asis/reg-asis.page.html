@@ -9,13 +9,13 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true" color="light">
+<ion-content [fullscreen]="true" >
 	
 	<ion-list>
 		<ion-list-header lines="full">
 			<ion-label>Asistencia</ion-label>
 		</ion-list-header>
-		
+	<div class="container">
 		<ion-item>
 			<ion-input label="Alumno:" [ngModel]="clase.estud" disabled></ion-input>
 		  </ion-item>
@@ -28,9 +28,9 @@
 		<ion-item>
 			<ion-input label="Sección:" [ngModel]="clase.secc" disabled></ion-input>
 		  </ion-item>
-		<ion-button (click)="sendData()" [routerLink]="['/home']">Registrar</ion-button>
+		<ion-button #anim (click)="sendData()" >Registrar</ion-button>
 		
-		
+	</div>		
 	</ion-list>
 
 </ion-content>

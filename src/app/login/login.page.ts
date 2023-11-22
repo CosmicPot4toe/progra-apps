@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
 	
 	
 	@ViewChild('div',{ read : ElementRef }) div!:ElementRef;
+
 	private load!:Animation
 	
 	logForm!:FormGroup;
@@ -46,17 +47,27 @@ export class LoginPage implements OnInit {
 			const user = await this.authService.loginUser(this.logForm.value.email,this.logForm.value.pw).catch((err)=>{
 				console.log(err)
 				loading.dismiss();
+
 			})
 			if(user){
 				loading.dismiss()
 				this.route.navigate(['/home'])
 				this.logForm.reset()
+				this.load.play();
 			}else{
 				console.log('provide correct vals')
+				loading.dismiss();
+				
+
 			}
 		}
 	}
+		isAlertOpen = false;
+	 alertButtons = ['Action'];
 
+	 setOpen(isOpen: boolean){
+		this.isAlertOpen = isOpen;
+	 }
 	ionViewDidLeave(){ //flick is GONE
 		this.load.stop();
 	}
@@ -65,7 +76,8 @@ export class LoginPage implements OnInit {
 			.create()
 			.addElement(this.div.nativeElement)
 			.duration(310)
-			.fromTo('transform', 'translateX(0px)', 'translateX(-120%)');
+			.fromTo('transform', 'translateY(0px)', 'translateY(-120%)');
+		
 	}
 
 }

@@ -19,6 +19,9 @@ export class HomePage {
 	@ViewChild('E',{ read : ElementRef }) E!:ElementRef;
 	private EE!:Animation
 
+	@ViewChild('scanAnim',{ read : ElementRef }) scanA!:ElementRef;
+	private scanAnim!:Animation
+
 	UserName!:string;
 
 	char:any[] = [];
@@ -41,17 +44,25 @@ export class HomePage {
 		this.anim = this.animCtrl
 			.create()
 			.addElement(this.com.nativeElement)
-			.duration(1000)
-			.fromTo('transform', 'translateX(300px)', 'translateX(0px)')
+			.duration(300)
+			
+			.fromTo('transform', 'translateY(120%)', 'translateY(0px)')
 			.fromTo('opacity', '0', '1');
 		this.anim.play();
 		this.EE = this.animCtrl
 			.create()
 			.addElement(this.E.nativeElement)
-			.duration(2000)
-			.fromTo('transform', 'translateY(3000px)', 'translateY(0px)')
+			.delay(500)
+			.easing('ease-in-out')
+			
+			.duration(400)
+			.fromTo('transform', 'translateX(-50px)', 'translateY(0px)')
+			.fromTo('opacity','0','1')
 		this.EE.play();
-		
+	}
+	async play(){
+		await this.anim.play();
+		await this.EE.play();
 	}
 	
 

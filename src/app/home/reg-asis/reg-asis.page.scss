@@ -1,28 +1,40 @@
-.container {
-	text-align: center;
-
-//   position: absolute;
-	left: 0;
-	right: 0;
-	top: 10%;
-	transform: translateY(-50%);
-		strong {
-				font-size: 20px;
-				line-height: 26px;
-		}
-		p {
-				font-size: 16px;
-				line-height: 22px;
-		
-				color: #8c8c8c;
-		
-				margin: 0;
-		}
-		a {
-				text-decoration: none;
-		}
+:root{
+	--orange:rgba(255,184,0,1);
+	--dark:rgba(26,26,26,1);
 }
+// .container {
+// 	text-align: center;
 
+// //   position: absolute;
+// 	left: 0;
+// 	right: 0;
+// 	top: 10%;
+// 	transform: translateY(-50%);
+// 		strong {
+// 				font-size: 20px;
+// 				line-height: 26px;
+// 		}
+// 		p {
+// 				font-size: 16px;
+// 				line-height: 22px;
+		
+// 				color: #8c8c8c;
+
+// 				margin: 0;
+// 		}
+// 		a {
+	// 				text-decoration: none;
+	// 		}
+	// }
+	ion-item{
+		text-align: center;
+	}
+.container{
+	display: flex;
+	flex-direction: column;
+	border-radius: 10%;
+	margin: 0 10%;
+}
 
 ion-toolbar {
 		display: flex;
@@ -45,7 +57,7 @@ ion-toolbar {
 	
 }
 ion-content{
-	--background:rgb(255, 255, 255);
+	--background:var(--dark);
 }
 h1{
 	color: black;
@@ -57,17 +69,15 @@ h1{
 		margin:0;
 		
 }
-.supercontainer{
-		height: 100%;
-		background: rgba(26,26,26,1)
 
-}
 ion-button{
 		margin: 10%;
-		--background:rgba(255,184,0,1)
+		--background:rgba(255,184,0,1);
+		color:black;
 }
 ion-list{
 	padding-top: 0;
+	background: transparent;
 
 }
 ion-list-header {
@@ -80,38 +90,9 @@ ion-list-header {
 	
 }
 
-ion-toggle {
-	// width: 40%;
 
-	// padding: 12px;
 
-	--track-background: #ddd;
-	--track-background-checked: rgba(255,184,0,1);
 
-	--handle-background: rgba(255,184,0,1);
-	--handle-background-checked: #000000;
-
-	--handle-width: 27px;
-	--handle-height: 27px;
-	--handle-max-height: auto;
-
-	--handle-border-radius: 50%;
-	padding-right: 10%;
-	
-}
-.listHeader{
-	--background: #000000;
-	font-size: large;
-
-}
-ion-toggle::part(track) {
-	height: 27px;
-	width: 45px;
-	border-radius: 50px;
-	/* Required for iOS handle to overflow the height of the track */
-	overflow: visible;
-	
-}
 ion-input[disabled]{
 	opacity: 1;
 }
