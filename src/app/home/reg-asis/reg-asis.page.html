@@ -28,8 +28,10 @@
 		<ion-item>
 			<ion-input label="Sección:" [ngModel]="clase.secc" disabled></ion-input>
 		  </ion-item>
-		<ion-button #anim (click)="sendData()" >Registrar</ion-button>
-		
+		<div #anim class="btn">
+		<ion-button  (click)="sendData()" >Registrar</ion-button>
+	</div>
+	<ion-icon #donee class="done" name="checkmark-done-outline"></ion-icon>
 	</div>		
 	</ion-list>
 

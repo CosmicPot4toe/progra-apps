@@ -69,11 +69,14 @@ h1{
 		margin:0;
 		
 }
-
-ion-button{
-		margin: 10%;
-		--background:rgba(255,184,0,1);
-		color:black;
+.btn{
+	width: 80%;
+	margin: 10%;
+	ion-button{
+			--background:rgba(255,184,0,1);
+			color:black;
+			width: 100%;
+	}
 }
 ion-list{
 	padding-top: 0;
@@ -95,4 +98,11 @@ ion-list-header {
 
 ion-input[disabled]{
 	opacity: 1;
+}
+.done{
+	position: absolute;
+	left: 45%;
+	top: 50%;
+	scale: 8;
+	color: rgba(255,184,0,1);
 }

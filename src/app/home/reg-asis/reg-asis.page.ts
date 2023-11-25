@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit , Renderer2} from '@angular/core';
+import { ActivatedRoute,Router } from '@angular/router';
 import { AnimationController,Animation } from '@ionic/angular';
 import { AuthService } from 'src/app/Services/fb/Auth/auth.service';
 import { DBService,Clase } from 'src/app/Services/fb/db/firestore.service';
 import { ElementRef, ViewChildren, ViewChild } from '@angular/core';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-reg-asis',
@@ -25,8 +26,9 @@ export class RegAsisPage implements OnInit {
 	}
 	
 	
-  constructor(private route: ActivatedRoute, private auth:AuthService, public db:DBService, private animationCtrl:AnimationController) { }
-  @ViewChild('anim',{ read : ElementRef }) anime!:ElementRef;
+  constructor(private route: ActivatedRoute, private auth:AuthService, public db:DBService, private animationCtrl:AnimationController, public renderer: Renderer2,private router: Router) { }
+  @ViewChild('anim',{ read : ElementRef , static: false}) anime!:ElementRef; @ViewChild('donee',{read: ElementRef}) done!:ElementRef;
+	private donee!: Animation;
 	private anim!: Animation;
   ngOnInit() {
     this.route.paramMap.subscribe(params=>{
@@ -45,8 +47,14 @@ export class RegAsisPage implements OnInit {
 
   }
  async sendData(){
-	await	this.anim.play().then(()=>{this.db.addClase(this.clase)})
-		
+	 await	this.anim.play().then(()=>{
+		this.db.addClase(this.clase)
+	
+	 this.donee.play().then(()=>{
+		setTimeout(()=>this.router.navigate(['/home']),2000);
+		 
+	 })
+	})
   }
 
 
@@ -54,11 +62,19 @@ export class RegAsisPage implements OnInit {
 	this.anim = this.animationCtrl
 	.create()
 	.addElement(this.anime.nativeElement)
-	.duration(3000)
-	.keyframes([
-	  { offset: 0, width: '80px' },
-	  { offset: 0.72, width: 'var(--width)' },
-	  { offset: 1, width: '240px' },
-	]);
+	.delay(1000)
+	.duration(500)
+	
+	.fromTo('transform','translateY(0)','translateY(-100px)')
+	.easing('ease-in')
+
+
+	this.donee= this.animationCtrl
+	.create()
+	.addElement(this.done.nativeElement)
+	.duration(500)
+	.fromTo('transform','translateY(0)','translateY(15px)')
+	.easing('ease-in')
+	
   }
 }
