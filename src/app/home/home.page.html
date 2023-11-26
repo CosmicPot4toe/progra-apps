@@ -16,11 +16,7 @@
 		<div #welcom class="container">
 			<div #E class="user">
 				<h2 >{{UserName}}</h2>
-				<div *ngFor="let c of char; index as i">
-					<div *ngIf="i == 5">
-						<img [src]="c.image">
-					</div>
-				</div>
+					<img [src]="url">
 			</div>
 			
 			<ion-button expand="block" (click)="scan()">

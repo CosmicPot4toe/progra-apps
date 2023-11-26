@@ -6,6 +6,7 @@ import { AuthService } from '../Services/fb/Auth/auth.service';
 import { RNmService } from '../Services/api/r-nm/r-nm.service';
 import { QrService } from '../Services/api/qr-scan/qr.service';
 import { DBService } from '../Services/fb/db/firestore.service';
+// import * as internal from 'stream';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,8 @@ export class HomePage {
 	private scanAnim!:Animation
 
 	UserName!:string;
+	Rand!:number;
+	url!:string;
 
 	char:any[] = [];
 	args={} as any;
@@ -64,7 +67,6 @@ export class HomePage {
 		await this.anim.play();
 		await this.EE.play();
 	}
-	
 
 	async scan(){
 		await this.qr.startScan();/* to test the reg-asis page use the string else the qr result */
@@ -86,10 +88,18 @@ export class HomePage {
 		this.rickNmorty.getChar(this.args).subscribe({
 			next:(res:any)=>{
 				this.char.push(...res.results)
-				console.log()
+				this.getChar()
 			},
 			error:(err:any)=>{}
 			}
 		)
+	}
+	getChar(){
+		this.Rand = Math.floor(Math.random() * 20)
+		this.char.forEach((v,i,a)=>{
+			if (i==this.Rand){
+				this.url=a[i].image
+			}
+		})
 	}
 }

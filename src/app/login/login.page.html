@@ -1,48 +1,24 @@
-<ion-header  >
-  <ion-toolbar >
-    <ion-title>DuocUC</ion-title>
-  </ion-toolbar>
+<ion-header>
+	<ion-toolbar>
+		<ion-title>DuocUC</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content #page>
-	<div #div class="container animate_animated animate__zoomIn ">
+	<div #div class="container">
 		<form id="login-box" [formGroup]="logForm">
-			<ion-input
-				formControlName="email"
-				id="label"
-				label="Usuario"
-				labelPlacement="floating">
+			<ion-input formControlName="email" id="label" label="Usuario" labelPlacement="floating">
 			</ion-input>
-			<ion-input
-				formControlName="pw"
-				id="label"
-				type="password"
-				label="Contraseña"
-				labelPlacement="floating">
+			<ion-input formControlName="pw" id="label" type="password" label="Contraseña" labelPlacement="floating">
 			</ion-input>
 			<ion-grid>
 				<ion-row>
 					<ion-col>
-						<ion-button class="  "
-							id="boton1"
-							(click)="login()"
-							size="default"
-						>
-						Ingresar</ion-button>
-						<ion-alert
-  trigger="present-alert"
-  header="A Short Title Is Best"
-  subHeader="A Sub Header Is Optional"
-  message="A message should be a short, complete sentence."
-  [buttons]="alertButtons"
-></ion-alert>
+						<ion-button id="boton1" (click)="login()" size="default">
+							Ingresar</ion-button>
 					</ion-col>
 					<ion-col>
-						<ion-button 
-							id="boton2"
-							[routerLink]="['/new-pass']"
-							size="small"
-						> Recuperar Contraseña </ion-button>
+						<ion-button id="boton2" [routerLink]="['/new-pass']" size="small"> Recuperar Contraseña </ion-button>
 					</ion-col>
 				</ion-row>
 			</ion-grid>
